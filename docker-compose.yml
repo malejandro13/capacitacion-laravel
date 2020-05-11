@@ -1,0 +1,9 @@
+version: "3.5"
+services:
+  prueba:
+    image: malejandro13/nginx-php73-dev:latest
+    container_name: prueba
+    volumes:
+      - ./:/var/www/html
+    ports:
+    - 8000:80
