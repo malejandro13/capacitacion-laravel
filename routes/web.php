@@ -13,22 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-$nombre = "Marcelo";
-
-Route::view('/', 'home', compact('nombre'))->name('home');
+Route::view('/', 'home')->name('home');
 
 Route::view('/about', 'about')->name('about');
 
 
-$portfolio = [
-    ['title' => 'Proyecto 1'],
-    ['title' => 'Proyecto 2'],
-    ['title' => 'Proyecto 3'],
-    ['title' => 'Proyecto 4'],
-];
-
-
-Route::view('/portfolio', 'portfolio', compact('portfolio'))->name('portfolio');
+Route::get('/portfolio', 'PortfolioController')->name('portfolio');
 
 Route::view('/contact', 'contact')->name('contact');
+
+Route::post('/contact', 'ContactController@store');
+
+//Route::resource('/projects', 'ProjectController');
 
