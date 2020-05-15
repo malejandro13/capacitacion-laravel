@@ -10,6 +10,7 @@ class ContactController extends Controller
     {
         $request->validate([
             'name' => 'required|max:3',
+            'fullname' => 'required',
             'email' => 'required|email'
         ]);
 

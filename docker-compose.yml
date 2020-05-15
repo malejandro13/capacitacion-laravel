@@ -7,3 +7,15 @@ services:
       - ./:/var/www/html
     ports:
     - 8000:80
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: pruebadb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+    ports: 
+      - 3306:3306
+
