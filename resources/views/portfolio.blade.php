@@ -6,11 +6,10 @@
     <h1>Porfolio View</h1>
 
     @forelse ($projects as $project)
-        <li>{{ $project->title }}</li><small>{{ $loop->first ? 'Este es el último' : '' }}</small>
+        <li>{{ $project->title }} <small>{{ $loop->last ? 'Este es el último' : '' }}</small></li>
     @empty
         <p>Está vacío</p>
     @endforelse
 
-    {{ $projects->links() }}
 
 @endsection

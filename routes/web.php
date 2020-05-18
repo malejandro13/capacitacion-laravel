@@ -17,12 +17,16 @@ Route::view('/', 'home')->name('home');
 
 Route::view('/about', 'about')->name('about');
 
-
-Route::get('/portfolio', 'ProjectController@index')->name('projects.index');
-
 Route::view('/contact', 'contact')->name('contact');
 
 Route::post('/contact', 'ContactController@store');
+
+Route::get('/portfolio', 'ProjectController@index')->name('projects.index');
+Route::get('/portfolio/create', 'ProjectController@create')->name('projects.create');
+Route::get('/portfolio/{project:slug}', 'ProjectController@show')->name('projects.show');
+
+Route::post('/portfolio', 'ProjectController@store')->name('projects.store');
+
 
 //Route::resource('/projects', 'ProjectController');
 

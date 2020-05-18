@@ -16,7 +16,7 @@ class ProjectController extends Controller
     {
 
         return view('portfolio', [
-            'projects' => Project::paginate(10),
+            'projects' => Project::all(),
         ]);
     }
 
@@ -27,7 +27,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('project.create');
     }
 
     /**
@@ -38,7 +38,14 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = $request->validate([
+            'title' => 'required',
+            'slug' => 'required',
+        ]);
+
+        $project = Project::create($fields);
+
+        return redirect()->route('projects.index');
     }
 
     /**
@@ -47,9 +54,12 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        //
+
+        return view('project.show', [
+            'project' => $project,
+        ]);
     }
 
     /**
