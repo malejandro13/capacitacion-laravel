@@ -22,10 +22,12 @@ Route::view('/contact', 'contact')->name('contact');
 Route::post('/contact', 'ContactController@store');
 
 Route::get('/portfolio', 'ProjectController@index')->name('projects.index');
-Route::get('/portfolio/create', 'ProjectController@create')->name('projects.create');
+Route::get('/portfolio/crear', 'ProjectController@create')->name('projects.create');
 Route::get('/portfolio/{project:slug}', 'ProjectController@show')->name('projects.show');
-
 Route::post('/portfolio', 'ProjectController@store')->name('projects.store');
+Route::patch('/portfolio/{project:slug}', 'ProjectController@update')->name('projects.update');
+Route::delete('/portfolio/{project:slug}', 'ProjectController@destroy')->name('projects.destory');
+Route::get('/portfolio/{project:slug}/editar', 'ProjectController@edit')->name('projects.edit');
 
 
 //Route::resource('/projects', 'ProjectController');

@@ -16,7 +16,7 @@ class ProjectController extends Controller
     {
 
         return view('portfolio', [
-            'projects' => Project::all(),
+            'projects' => Project::paginate(5),
         ]);
     }
 
@@ -40,12 +40,12 @@ class ProjectController extends Controller
     {
         $fields = $request->validate([
             'title' => 'required',
-            'slug' => 'required',
+            'slug' => 'required|unique:projects',
         ]);
 
         $project = Project::create($fields);
 
-        return redirect()->route('projects.index');
+        return redirect()->route('projects.index')->with('status', 'Su registro fue creado satisfactoriamente');
     }
 
     /**
@@ -68,9 +68,11 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        return view('project.edit', [
+            'project' => $project,
+        ]);
     }
 
     /**
@@ -80,9 +82,17 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $fields = $request->validate([
+            'title' => 'required',
+            'slug' => 'required',
+        ]);
+
+        $project->update($fields);
+
+        return redirect()->route('projects.index')->with('status', 'Su registro fue actualizado satisfactoriamente');;
+
     }
 
     /**
@@ -91,8 +101,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect()->route('projects.index')->with('status', 'Su registro fue eliminado satisfactoriamente');;
     }
 }
