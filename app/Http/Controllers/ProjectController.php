@@ -86,7 +86,7 @@ class ProjectController extends Controller
     {
         $fields = $request->validate([
             'title' => 'required',
-            'slug' => 'required',
+            'slug' => 'required|unique:projects,slug,'.$project->id,
         ]);
 
         $project->update($fields);
